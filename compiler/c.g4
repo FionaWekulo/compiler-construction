@@ -1,0 +1,63 @@
+grammar c;
+
+// Lexer rules
+INT: 'int';
+FLOAT: 'float';
+CHAR: 'char';
+IF: 'if';
+ELSE: 'else';
+WHILE: 'while';
+FOR: 'for';
+PRINTX: 'printx';
+ID: [a-zA-Z]+ ;
+STRING: '"' (~["])* '"' ;
+SEMI: ';' ;
+LPAREN: '(' ;
+RPAREN: ')' ;
+LBRACE: '{' ;
+RBRACE: '}' ;
+COMMA: ',' ;
+PLUS: '+' ;
+MINUS: '-' ;
+MULT: '*' ;
+DIV: '/' ;
+MOD: '%' ;
+ASSIGN: '=' ;
+PLUS_ASSIGN: '+=' ;
+MINUS_ASSIGN: '-=' ;
+MULT_ASSIGN: '*=' ;
+DIV_ASSIGN: '/=' ;
+MOD_ASSIGN: '%=' ;
+INCREMENT: '++' ;
+DECREMENT: '--' ;
+EQ: '==' ;
+NEQ: '!=' ;
+LT: '<' ;
+GT: '>' ;
+LTEQ: '<=' ;
+GTEQ: '>=' ;
+AND: '&&' ;
+OR: '||' ;
+NOT: '!' ;
+WS : [ \t\r\n]+ -> skip ; // ignore whitespace
+
+// Parser rules
+program: statement+ ;
+statement: variable_declaration | assignment_statement | print_statement | if_statement | while_statement | for_statement ;
+variable_declaration: data_type ID (ASSIGN expression)? SEMI ;
+data_type: INT | FLOAT | CHAR ;
+assignment_statement: (ID INCREMENT | ID DECREMENT | ID | ID PLUS_ASSIGN | ID MINUS_ASSIGN | ID MULT_ASSIGN | ID DIV_ASSIGN | ID MOD_ASSIGN) ASSIGN expression SEMI ;
+print_statement: PRINTX LPAREN (STRING | ID) RPAREN SEMI ;
+if_statement: IF LPAREN expression RPAREN LBRACE statement+ RBRACE (ELSE LBRACE statement+ RBRACE)? ;
+while_statement: WHILE LPAREN expression RPAREN LBRACE statement+ RBRACE ;
+for_statement: FOR LPAREN assignment_statement expression SEMI assignment_statement RPAREN LBRACE statement+ RBRACE ;
+expression: logical_term ((OR) logical_term)* ;
+logical_term: logical_factor ((AND) logical_factor)* ;
+logical_factor: NOT? (relation | LPAREN logical_term RPAREN) ;
+relation: additive_expression ((EQ | NEQ | LT | GT | LTEQ | GTEQ) additive_expression)* ;
+additive_expression: multiplicative_expression ((PLUS | MINUS) multiplicative_expression)* ;
+multiplicative_expression: factor ((MULT | DIV | MOD) factor)* ;
+factor: (ID INCREMENT | ID DECREMENT | ID PLUS_ASSIGN | ID MINUS_ASSIGN | ID MULT_ASSIGN | ID DIV_ASSIGN | ID MOD_ASSIGN) ASSIGN expression | ID | INT_LITERAL | FLOAT_LITERAL | CHAR_LITERAL | LPAREN expression RPAREN ;
+INT_LITERAL: [0-9]+ ;
+FLOAT_LITERAL: [0-9]+ '.' [0-9]+ ;
+CHAR_LITERAL: '\'' . '\'' ;

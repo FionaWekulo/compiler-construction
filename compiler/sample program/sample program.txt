@@ -1,0 +1,67 @@
+
+
+int i ;
+int num = 5;
+int sum;
+int diff;
+int mod;
+int square = 1;
+int cube = 1;
+int sqr = 1;
+int ans;
+float div;
+float mul;
+float ans;
+float solution;
+printx(“The program below shows simple mathematical operations by use of SilverSyntax.”);
+printx(“1. Addition”);
+sum = 120 + 1909;
+printx(“120 + 1909 = ”);
+printx(sum);
+printx(“1. Subtraction”);
+diff = 120 - 1909;
+printx(“120 - 1909 = ”);
+printx(diff);
+printx(“1. Multiplication”);
+mult = 0.5 * 3;
+printx(“0.5 * 3 = ”);
+printx(mult);
+printx(“1. Division”);
+div = 799 / 131;
+printx(“799 / 131 = ”);
+printx(div);
+printx(“The section below is used to find the square of the number 5.”);
+for (i=1;i<=num;i=i+1;)
+{
+square = square * num;
+}
+printx (“The square of 5 is”);
+printx(square);
+printx(“The section below gives the cube of the number 3”);
+for (i=1;i<=3;i=i+1;)
+{
+sqr = sqr * num;
+for(i=1;i<=num;i=i+1;)
+{
+cube = cube * sqr;
+}
+}
+if (cube > 0 && cube == 27)
+{
+printx (“The cube of 3 is”);
+printx(cube);
+}
+else
+{
+printx(“The cube of 3 is incorrect”);
+}
+printx(“The section below shows the application of mixed operations in an expression.”);
+ans = 12 / 7 * 3;
+printx(“12 / 7 * 3”);
+printx(“ans”);
+solution = 56.2 + 726 / 32.78;
+printx(“56.2 + 726 / 32.78”);
+printx(“solution”);
+mod =234 – (78 % 5);
+printx(“234 – (78 % 5)”);
+printx(“mod”);
